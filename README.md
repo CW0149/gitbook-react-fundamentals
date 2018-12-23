@@ -16,11 +16,11 @@
 
 目录：
 
-* [基础工具](_book/tools/README.html)
-	* [Git](_book/tools/git.html)
-  * [NPM](_book/ools/npm.html)
-  * [Webpack、Babel](_book/tools/webpack.html)
-  * [总结](_book/tools/summary.html)
-* [尝试集](_book/practice/readme.html)
-    * [如何优化网站速度](_book/practice/speedup.html)
-    * [常用的React包](_book/practice/dependencies.html)
+* [基础工具](tools/README.md)
+	* [Git](tools/git.md)
+  * [NPM](tools/npm.md)
+  * [Webpack、Babel](tools/webpack.md)
+  * [总结](tools/summary.md)
+* [尝试集](practice/readme.md)
+    * [如何优化网站速度](practice/speedup.md)
+    * [常用的React包](practice/dependencies.md)
