@@ -5,16 +5,12 @@
 ### Webpack
 Webpack是什么？
 
-> webpack 是一个现代 JavaScript 应用程序的静态模块打包器(static module bundler)。在 webpack 处理应用程序时，它会在内部创建一个依赖图(dependency graph)，用于映射到项目需要的每个模块，然后将所有这些依赖生成到一个或多个bundle。
->
->换言之，webpack就像是一个装配工厂，能够按照装配图将各零件处理、组合、打包成成品。不仅如此，它还提供了如热更新等功能方便你开发调试。
+> webpack 是一个现代 JavaScript 应用程序的静态模块打包器(static module bundler)。在 webpack 处理应用程序时，它会在内部创建一个依赖图(dependency graph)，用于映射到项目需要的每个模块，然后将所有这些依赖生成到一个或多个bundle。<br>换言之，webpack就像是一个装配工厂，能够按照装配图将各零件处理、组合、打包成成品。不仅如此，它还提供了如热更新等功能方便你开发调试。
 
 如何使用Webpack？
 
-> 你需要引入webpack依赖包：`npm install webpack webpack-cli --save-dev`，然后给package.json文件的scripts添加如 "build": "webpack"，在命令行输入 `npm run build`就可以运行webpack命令。不过，直接运行会报错，你需要先在根目录下新建一个webapck.config.js文件，这是webpack默认配置文件，这个文件配置示例如下：
->
-
->```
+> 你需要引入webpack依赖包：`npm install webpack webpack-cli --save-dev`，然后给package.json文件的scripts添加如 "build": "webpack"，在命令行输入 `npm run build`就可以运行webpack命令。不过，直接运行会报错，你需要先在根目录下新建一个webapck.config.js文件，这是webpack默认配置文件，这个文件配置示例如下：<br>
+```
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
