@@ -36,9 +36,8 @@ module.exports = {
 
 [Webpack几个核心概念](https://webpack.docschina.org/concepts)：
 
-> 作为一个工具webpack需要输入，也会有输出。在entry字段中定义输入，输出则定义在output字段中。输入可能有很多类型，可在webpack中引入loader将这些类型转换为浏览器识别的语言类型。实际项目中可能还需要进行优化等操作，webpack的plugin字段能够让我们进行如打包优化、资源管理和注入环境变量等操作。
-
->* 入口(entry)
+>作为一个工具webpack需要输入，也会有输出。在entry字段中定义输入，输出则定义在output字段中。输入可能有很多类型，可在webpack中引入loader将这些类型转换为浏览器识别的语言类型。实际项目中可能还需要进行优化等操作，webpack的plugin字段能够让我们进行如打包优化、资源管理和注入环境变量等操作。<br>
+* 入口(entry)
 	* entry指示了构建(内部依赖图)的起点文件，默认值是./src/index.js。
 * 输出(output)
 	*  output定义了webpack 在哪里输出它所创建的 bundles，以及如何命名这些文件，主输出文件默认为 ./dist/main.js，其他生成文件的默认输出目录是 ./dist。
@@ -49,7 +48,6 @@ module.exports = {
 	* loader 被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务，插件的范围包括：打包优化、资源管理和注入环境变量。
 * 模式(mode)
 	* 通过将 mode 参数设置为 development, production 或 none，可以启用对应环境下 webpack 内置的优化。默认值为 production。
-
 
 ### Babel
 
