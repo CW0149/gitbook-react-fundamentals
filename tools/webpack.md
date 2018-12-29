@@ -3,13 +3,14 @@
 你已经使用Git管理网站版本，使用npm管理网站依赖。你现在要开始写代码，想使用es6语法，你还想部署到生产环境的文件是打包好的，然后觉得用less语法写css也不错...。那么，如何方便的做到这些呢？Webpack就是帮助你方便实现这些的工具。现在先在根目录下新建src文件夹，然后在里面新建index.html、index.js、index.css。
 
 ### Webpack
-Webpack是什么？
+#### Webpack是什么？
 
-> webpack 是一个现代 JavaScript 应用程序的静态模块打包器(static module bundler)。在 webpack 处理应用程序时，它会在内部创建一个依赖图(dependency graph)，用于映射到项目需要的每个模块，然后将所有这些依赖生成到一个或多个bundle。<br>换言之，webpack就像是一个装配工厂，能够按照装配图将各零件处理、组合、打包成成品。不仅如此，它还提供了如热更新等功能方便你开发调试。
+webpack 是一个现代 JavaScript 应用程序的静态模块打包器(static module bundler)。在 webpack 处理应用程序时，它会在内部创建一个依赖图(dependency graph)，用于映射到项目需要的每个模块，然后将所有这些依赖生成到一个或多个bundle。<br>换言之，webpack就像是一个装配工厂，能够按照装配图将各零件处理、组合、打包成成品。不仅如此，它还提供了如热更新等功能方便你开发调试。
 
-如何使用Webpack？
+#### 如何使用Webpack？
 
-> 你需要引入webpack依赖包：`npm install webpack webpack-cli --save-dev`，然后给package.json文件的scripts添加如 "build": "webpack"，在命令行输入 `npm run build`就可以运行webpack命令。不过，直接运行会报错，你需要先在根目录下新建一个webapck.config.js文件，这是webpack默认配置文件，这个文件配置示例如下：<br>
+你需要引入webpack依赖包：`npm install webpack webpack-cli --save-dev`，然后给package.json文件的scripts添加如 "build": "webpack"，在命令行输入 `npm run build`就可以运行webpack命令。不过，直接运行会报错，你需要先在根目录下新建一个webapck.config.js文件，这是webpack默认配置文件，这个文件配置示例如下：
+
 ```
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -34,9 +35,9 @@ module.exports = {
 }
 ```
 
-[Webpack几个核心概念](https://webpack.docschina.org/concepts)：
+#### [Webpack几个核心概念](https://webpack.docschina.org/concepts)：
 
->作为一个工具webpack需要输入，也会有输出。在entry字段中定义输入，输出则定义在output字段中。输入可能有很多类型，可在webpack中引入loader将这些类型转换为浏览器识别的语言类型。实际项目中可能还需要进行优化等操作，webpack的plugin字段能够让我们进行如打包优化、资源管理和注入环境变量等操作。<br>
+作为一个工具webpack需要输入，也会有输出。在entry字段中定义输入，输出则定义在output字段中。输入可能有很多类型，可在webpack中引入loader将这些类型转换为浏览器识别的语言类型。实际项目中可能还需要进行优化等操作，webpack的plugin字段能够让我们进行如打包优化、资源管理和注入环境变量等操作。<br>
 * 入口(entry)
 	* entry指示了构建(内部依赖图)的起点文件，默认值是./src/index.js。
 * 输出(output)

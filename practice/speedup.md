@@ -7,7 +7,14 @@
 ```
 反馈就像是灯塔，能指引你不断调整方向。
 ```
-> 反馈能让我们知道自己的每一步优化操作是否产生作用。<br>在处理前，问自己一个问题：是否有个工具能让我们实时看到打包文件的大小呢？所幸，有一个叫[webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)的webpack插件就是做这个的。<br>`npm install webpack-bundle-analyzer --save-dev`后，在webpack配置的plugin中添加这个插件，之后每次`npm start`、`npm run build`它便会在默认8888端口开启一个服务，浏览器127.0.0.1:8888访问就能在页面上看到每个打包文件的组成和大小。<br>问题来了，create-react-app默认将webpack封装在node_modules的react-scripts里面，如果你不想使用eject命令将webpack配置文件暴露出来(想随时跟随react-scripts的更新)又如何修改webpack配置呢？<br>
+反馈能让我们知道自己的每一步优化操作是否产生作用。
+
+在处理前，问自己一个问题：是否有个工具能让我们实时看到打包文件的大小呢？所幸，有一个叫[webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)的webpack插件就是做这个的。
+
+`npm install webpack-bundle-analyzer --save-dev` 后，在webpack配置的plugin中添加这个插件，之后每次`npm start`、`npm run build`它便会在默认8888端口开启一个服务，浏览器127.0.0.1:8888访问就能在页面上看到每个打包文件的组成和大小。
+
+问题来了，create-react-app默认将webpack封装在node_modules的react-scripts里面，如果你不想使用eject命令将webpack配置文件暴露出来(想随时跟随react-scripts的更新)又如何修改webpack配置呢？
+
 #### reate-react-app如何不使用eject命令修改默认webpack配置？<br>
 ```
 凡是合理的，你所需要的通常都有人做了，你所想的通常都有人想过。
@@ -50,12 +57,16 @@ module.exports = function override(config, env) {
   return config
 }
 ```
-重新`npm start`后边浏览器就会自动打开一个地址为127.0.0.1:8888的页面显示打包信息。<br>
-#### 现在我们已经能够实时查看打包文件信息，接下来要如何对打包做优化呢？<br>
+重新`npm start`后边浏览器就会自动打开一个地址为127.0.0.1:8888的页面显示打包信息。
+
+#### 现在我们已经能够实时查看打包文件信息，接下来要如何对打包做优化呢？
+
 create-react-app已经对build后的文件做了压缩，没必要再进行压缩处理（create-react-app也已经在webpack对moment这样很常用的依赖进行优化处理）。实际上打包文件大是因为默认webpack将我们引入的公共依赖都打包到了同一个js文件，而实际上在加载某个页面的时候可能并不需要用到某些很大的依赖，因此我们需要将包打碎细分成更小的块，打开某页的时候按需加载-懒加载。<br>
 #### [如何实现代码分离？](https://webpack.docschina.org/guides/code-splitting/)
-webpack官方文档提出了解决方法，在最新的create-react-app也都得到支持(这就是让react-scripts自己维护webpack的好处)，如防止依赖引用重复的splitChunks、动态导入功能。webpack会自动将动态导入的模块分离到一个单独的文件，这种方式使用起来就很灵活了动态引入大的依赖，也可以按需引入路由-路由懒加载。<br>
+webpack官方文档提出了解决方法，在最新的create-react-app也都得到支持(这就是让react-scripts自己维护webpack的好处)，如防止依赖引用重复的splitChunks、动态导入功能。webpack会自动将动态导入的模块分离到一个单独的文件，这种方式使用起来就很灵活了动态引入大的依赖，也可以按需引入路由-路由懒加载。
+
 **如何实现路由懒加载呢？**
+
 你可以实现一个路由懒加载的组件，如下：
 ```
 import React from 'react'
@@ -102,39 +113,49 @@ export default lazyLoad
 
 ### 如何优化网站访问速度？
 
->现在我们刷新网页只会加载当前页的代码，大大加快了相应速度。现在还能做怎样的优化呢？<br>我们还可以对nginx服务器进行设置，使其使用gzip对代码进行压缩、以及启用http/2。<br>使用http/1协议，做网站优化需要尽量将需要的js、图片、css等文件打包成一个，这样能够减少占用时间长的网络传输时间。但是使用http2在网络传输上做了很大优化，将不常更新的文件分离出来反而能利用缓存增加传输效率。不仅如此http/2会压缩请求标头、解决了队头阻塞问题而且被广泛支持、向后兼容。<br>
-**nginx服务器如何启用gzip?**<br>
+现在我们刷新网页只会加载当前页的代码，大大加快了相应速度。现在还能做怎样的优化呢？
+
+我们还可以对nginx服务器进行设置，使其使用gzip对代码进行压缩、以及启用http/2。
+
+使用http/1协议，做网站优化需要尽量将需要的js、图片、css等文件打包成一个，这样能够减少占用时间长的网络传输时间。但是使用http2在网络传输上做了很大优化，将不常更新的文件分离出来反而能利用缓存增加传输效率。不仅如此http/2会压缩请求标头、解决了队头阻塞问题而且被广泛支持、向后兼容。
+
+
+#### nginx服务器如何启用gzip?
+
 在/etc/nginx的nginx.conf文件中设置如下：
+
 ```
-	# 开启gzip
-	gzip on;
-	# 启用gzip压缩的最小文件，小于设置值的文件将不会压缩
-	gzip_min_length 1k;
-	# gzip 压缩级别，1-10，数字越大压缩的越好，也越占用CPU时间，后面会有详细说明
-	gzip_comp_level 2;
-	# 进行压缩的文件类型。javascript有多种形式。其中的值可以在 mime.types 文件中找到。
-	gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png font/ttf font/otf image/svg+xml;
-	# 是否在http header中添加Vary: Accept-Encoding，建议开启
-	gzip_vary on;
-	# 禁用IE 6 gzip
-	gzip_disable "MSIE [1-6]\.";
+# 开启gzip
+gzip on;
+# 启用gzip压缩的最小文件，小于设置值的文件将不会压缩
+gzip_min_length 1k;
+# gzip 压缩级别，1-10，数字越大压缩的越好，也越占用CPU时间，后面会有详细说明
+gzip_comp_level 2;
+# 进行压缩的文件类型。javascript有多种形式。其中的值可以在 mime.types 文件中找到。
+gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png font/ttf font/otf image/svg+xml;
+# 是否在http header中添加Vary: Accept-Encoding，建议开启
+gzip_vary on;
+# 禁用IE 6 gzip
+gzip_disable "MSIE [1-6]\.";
 ```
-设置成功后访问你的网站，打开浏览器控制台，就能在network的response headers里面看到content-encoding: gzip。<br>
-**如何启用http2？**<br>
+设置成功后访问你的网站，打开浏览器控制台，就能在network的response headers里面看到content-encoding: gzip。
+
+#### 如何启用http2？
+
 首先nginx版本是否支持https，安装说明进行操作，设置如下：
 ```
-    listen       443 ssl;
-    listen       [::]:443 ssl http2;
+listen       443 ssl;
+listen       [::]:443 ssl http2;
 ```
 
 ### 总结
 
-为了优化网站访问速度，我使用了：<br>
->react-app-rewired修改默认webpack配置<br>
-webpack-bundle-analyzer查看打包文件情况<br>
-路由懒加载实现代码分离以及路由按需加载<br>
-nginx设置传输gzip压缩<br>
-nginx使用http2传输协议
+为了优化网站访问速度，我使用了：
+* react-app-rewired修改默认webpack配置
+* webpack-bundle-analyzer查看打包文件情况
+* 路由懒加载实现代码分离以及路由按需加载
+* nginx设置传输gzip压缩
+* nginx使用http2传输协议
 
 
 
