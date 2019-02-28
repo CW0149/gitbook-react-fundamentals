@@ -2,12 +2,13 @@
 
 你已经使用Git管理网站版本，使用npm管理网站依赖。你现在要开始写代码，想使用es6语法，你还想部署到生产环境的文件是打包好的，然后觉得用less语法写css也不错...。那么，如何方便的做到这些呢？Webpack就是帮助你方便实现这些的工具。现在先在根目录下新建src文件夹，然后在里面新建index.html、index.js、index.css。
 
-### Webpack
-#### Webpack是什么？
+## Webpack
+
+### 它是什么
 
 webpack 是一个现代 JavaScript 应用程序的静态模块打包器(static module bundler)。在 webpack 处理应用程序时，它会在内部创建一个依赖图(dependency graph)，用于映射到项目需要的每个模块，然后将所有这些依赖生成到一个或多个bundle。<br>换言之，webpack就像是一个装配工厂，能够按照装配图将各零件处理、组合、打包成成品。不仅如此，它还提供了如热更新等功能方便你开发调试。
 
-#### 如何使用Webpack？
+### 它如何使用
 
 你需要引入webpack依赖包：`npm install webpack webpack-cli --save-dev`，然后给package.json文件的scripts添加如 "build": "webpack"，在命令行输入 `npm run build`就可以运行webpack命令。不过，直接运行会报错，你需要先在根目录下新建一个webapck.config.js文件，这是webpack默认配置文件，这个文件配置示例如下：
 
@@ -35,7 +36,7 @@ module.exports = {
 }
 ```
 
-#### [Webpack几个核心概念](https://webpack.docschina.org/concepts)：
+### [几个核心概念](https://webpack.docschina.org/concepts)
 
 作为一个工具webpack需要输入，也会有输出。在entry字段中定义输入，输出则定义在output字段中。输入可能有很多类型，可在webpack中引入loader将这些类型转换为浏览器识别的语言类型。实际项目中可能还需要进行优化等操作，webpack的plugin字段能够让我们进行如打包优化、资源管理和注入环境变量等操作。<br>
 * 入口(entry)
@@ -50,12 +51,18 @@ module.exports = {
 * 模式(mode)
 	* 通过将 mode 参数设置为 development, production 或 none，可以启用对应环境下 webpack 内置的优化。默认值为 production。
 
+## webpack常用转义工具
+
 ### Babel
 
 要转译es6语法，你需要Babel。Babel能将你写的最新es6语法转译成浏览器支持的版本。当然Babel功能很强大，不止可以转译es6/7语法，还能转译react中使用的jsx语法。结合webpack使用，则需要安装babel-loader。下面看下命令行输入：
 
 ```
-npm install @babel/core @babel/preset-env @babel/preset-react --save-dev  // @babel/core是babel核心代码，@babel/preset-env能转译最新js语法，@babel/preset-react能转译jsx语法。
+// @babel/core是babel核心代码
+// @babel/preset-env能转译最新js语法
+// @babel/preset-react能转译jsx语法。
+
+npm install @babel/core @babel/preset-env @babel/preset-react --save-dev
 ```
 安装转译所需Babel依赖后，需要配置Babel。如上webpack配置示例，在webpack.config.js中，添加loader `{ test: /\.(js)$/, use: 'babel-loader' }`，表示将所有.js结尾的文件使用[babel-loader](https://webpack.docschina.org/loaders/babel-loader/)转译，具体使用babel中哪种转译，可以在loader的options字段中定义，如下：
 
@@ -87,7 +94,7 @@ module: {
 }
 ```
 
-### style-loader、css-loader
+### style-loader与css-loader
 
 [style-loader](https://webpack.docschina.org/loaders/style-loader/)与[css-loader](https://webpack.docschina.org/loaders/css-loader/)是webpack中常用的两个loader。不像babel-loader需要配置使用哪种转译方法，style-loader和css-loader只需要`npm install style-loader css-loader --save-dev`，然后在webpack.config.js的rules中添加如`{ test: /\.(css)$/, use: ['style-loader', 'css-loader'] }`就行。
 
@@ -104,6 +111,8 @@ css-loader则将 @import和 url() 解释为import/require() 并解析它们。�
 @import url('./style.css') => require('./style.css')
 @import url('http://dontwritehorriblecode.com/style.css') => @import url('http://dontwritehorriblecode.com/style.css') in runtime
 ```
+
+## 常用plugin
 
 ### HtmlWebpackPlugin
 
@@ -122,7 +131,7 @@ plugins: [
 ```
 参数中template字段定义了模版html，这个插件能够读取webpack配置将template文件拷贝到输出文件夹并更改里面资源的引入路径。
 
-### webpack-dev-server
+## webpack热加载
 
 webpack-cli提供了在命令行中使用webpack的方法，你可以在package.json中添加scripts命令如：
 

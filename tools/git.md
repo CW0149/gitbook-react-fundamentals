@@ -1,14 +1,14 @@
 # Git
 
-#### 假设，你想写一个网站，已经建了个叫做site-fe的文件夹用于存储前台页面，你命令行进入了这个文件夹，并想要用git管理你的网站版本，将代码托管到github，接下来你要怎么做？
+假设，你想写一个网站，已经建了个叫做site-fe的文件夹用于存储前台页面，你命令行进入了这个文件夹，并想要用git管理你的网站版本，将代码托管到github，接下来你要怎么做？
 
 如果你已经安装git, 在当前文件夹命令行输入`git init`回车（在当前目录创建一个名为 .git 的子目录，这个子目录含有你初始化的 Git 仓库中所有的必须文件）后便会将当前文件夹初始化为git仓库。然后你就可以用git add/git commit等命令搭配参数对当前仓库进行本地版本管理。<br>
 
-**如何将代码推到github呢？**
+## 如何将代码推到github
 
 首先你要有一个github账号，然后新建repository，新建完后会提示你给本地项目添加远程仓库，有https和ssh两种通讯协议，两种方式都可以设置免密传输，我通常是选择ssh。本地命令行运行`git remote add origin git@github.com:<userName>/<repoName>.git` 就给本地仓库添加了远程仓库，`git remote -v`可以查看。如果要修改可以输入`git remote set-url origin <new remote>`。然后运行git push就可以把本地commit了的代码提交到远程了。
 
-**如何使用ssh通讯协议免密推拉代码呢？**
+## 如何使用ssh免密推拉代码
 
 你可以在github个人主页setting/ssh里面将电脑命令行ssh-keygen默认生成的`~/.ssh/id_rsa.pub`文件内容提交，由于id_rsa.pub这个文件内容是唯一的，这样就相当于绑定了这台电脑与github账户，以后这台电脑ssh方式拉取和推代码就不需要输入用户名和密码。
 
@@ -24,7 +24,7 @@ Host test_github.com
 ```
 然后，将代码仓库的远程仓库地址设置成`git@test_github.com:<userName>/<repoName>.git`。
 
-**以下是我常用的git命令：**
+## 常用的git命令
 
 ```
 git status // 查看仓库状态

@@ -1,0 +1,13 @@
+code {
+	white-space: pre-wrap !important;
+}
+
+hr {
+	margin: 0 0 1.2em !important;
+  height: 1px !important;
+  background-color: #f4f4f5 !important;
+}
+
+h2 {
+	border-bottom: 1px solid #eaecef;
+}

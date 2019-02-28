@@ -1,3 +1,48 @@
 {
-	"plugins": ["expandable-chapters-small"]
+    "title": "Yan Huang的技术笔记",
+    "language": "zh",
+    "plugins" : [
+        "anchor-navigation-ex",
+        "expandable-chapters-small",
+        "sitemap-general",
+        "copy-code-button"
+    ],
+    "pluginsConfig": {
+        "sitemap-general": {
+            "prefix": "https://gitbook.ryanhuang.cn/ReactFundamentals/_book/"
+        },
+        "anchor-navigation-ex": {
+            "showLevel": false,
+            "associatedWithSummary": true,
+            "printLog": false,
+            "multipleH1": false,
+            "mode": "float",
+            "showGoTop":true,
+            "float": {
+                "floatIcon": "fa fa-anchor",
+                "showLevelIcon": true,
+                "level1Icon": "fa fa-star",
+                "level3Icon": "fa fa-magic",
+                "level2Icon": "fa fa-hashtag"
+            },
+            "pageTop": {
+                "showLevelIcon": false,
+                "level1Icon": "fa fa-hand-o-right",
+                "level2Icon": "fa fa-hand-o-right",
+                "level3Icon": "fa fa-hand-o-right"
+            }
+        },
+        "sharing": {
+            "facebook": false,
+            "twitter": false,
+            "google": false,
+            "weibo": false,
+            "instapaper": false,
+            "vk": false,
+            "all": [
+                "facebook", "google", "twitter",
+                "weibo", "instapaper"
+            ]
+        }
+    }
 }
